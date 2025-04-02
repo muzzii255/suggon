@@ -3,12 +3,12 @@ import requests
 import json
 import time
 
-urls = """random urls"""
+urls = """https://www.google.com"""
 urls = urls.split('\n')
 
 def MassRequest(url):
     a = time.perf_counter()
-    req = requests.post("http://127.0.0.1:8000/scrape",json={"url":url})
+    req = requests.post("http://37.114.37.46:8000/scrape",json={"url":url})
     print(req.json()['blocked'])
     print(req.status_code)
     b = time.perf_counter()

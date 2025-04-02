@@ -19,13 +19,6 @@ logger = logging.getLogger(__name__)
 
 driver_queue = asyncio.Queue()
 
-scrape_results = {}
-
-class TaskStatus:
-    PENDING = "pending"
-    COMPLETE = "complete"
-    FAILED = "failed"
-
 class URLRequest(BaseModel):
     url: str
 

@@ -1,5 +1,4 @@
 from fastapi import FastAPI, HTTPException, BackgroundTasks
-
 from pydantic import BaseModel
 from starlette.types import Lifespan
 import uvicorn
@@ -40,7 +39,6 @@ def get_proxy():
     
 @asynccontextmanager
 async def startup(app: FastAPI):
-    # Load the ML model
     for _ in range(N_WORKERS):
         driver = SeleniumWorker(proxy=get_proxy())  
         await driver_queue.put(driver)
@@ -57,7 +55,7 @@ async def scrape_task(driver, url):
 
 async def cancel_task(task, driver):
     logger.info(f"Attempting to cancel task {task}")
-    task.cancel()  # Cancel the ongoing task
+    task.cancel()  
 
     if driver and driver.is_stale():
         driver.restart(new_proxy=get_proxy())
